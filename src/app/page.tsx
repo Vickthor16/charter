@@ -29,6 +29,7 @@ const Home: React.FC = () => {
   const [selectedMovieId, setSelectedMovieId] = useState<string | null>(null);
   const [movieDetails, setMovieDetails] = useState<MovieDetail | null>(null);
   const [genres, setGenres] = useState<string[]>([]);
+  const [selectedGenre, setSelectedGenre] = useState<string>('All');
  
   useEffect(() => {
     const fetchData = async () => {
