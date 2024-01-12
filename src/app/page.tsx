@@ -1,36 +1,34 @@
-
 "use client";
 
 import React, { useState, useEffect } from 'react';
 import MovieList from './components/MovieList';
 import MovieModal from './components/MovieModal';
-import '../styles/global.css' 
+import '../styles/global.css'
 
-interface Movie  {
+interface Movie {
   id: string;
   title: string;
   genres: string[];
 };
- 
+
 interface MovieDetail {
- id: string;
- title: string;
- description: string;
- duration: string;
- genres: string[];
- releaseDate: string;
- releaseYear: string;
+  id: string;
+  title: string;
+  description: string;
+  duration: string;
+  genres: string[];
+  releaseDate: string;
+  releaseYear: string;
 };
- 
+
 const Home: React.FC = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [showModal, setShowModal] = useState(false);
-  const [selectedMovieId, setSelectedMovieId] = useState<string | null>(null);
   const [movieDetails, setMovieDetails] = useState<MovieDetail | null>(null);
   const [genres, setGenres] = useState<string[]>([]);
   const [selectedGenre, setSelectedGenre] = useState<string>('All');
- 
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -45,27 +43,31 @@ const Home: React.FC = () => {
         const result = await response.json();
         setMovies(result.data);
 
-        const allGenres = result.data.flatMap(movie => movie.genres);
+        const allGenres = result.data.flatMap((movie: { genres: any; }) => movie.genres);
         const uniqueGenres = Array.from(new Set(allGenres));
         setGenres(['All', ...uniqueGenres]);
 
-        
+
       } catch (error) {
         console.error('Error fetching movies:', error);
       }
     };
- 
+
     fetchData();
   }, []);
- 
+
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
- 
+
+  const handleGenreChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedGenre(event.target.value);
+  };
+
+
   const handleCardClick = async (movieId: string) => {
-    setSelectedMovieId(movieId);
     setShowModal(true);
- 
+
     try {
       const response = await fetch(`https://code-challenge.spectrumtoolbox.com/api/movies/${movieId}`, {
         headers: {
@@ -77,40 +79,39 @@ const Home: React.FC = () => {
       }
       const details = await response.json();
 
-     
+
       setMovieDetails(details.data);
 
     } catch (error) {
       console.error('Error fetching movie details:', error);
     }
   };
- 
+
+
   const filteredMovies = movies.filter(movie =>
-    movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+    movie.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+    (selectedGenre === 'All' || movie.genres.includes(selectedGenre))
   );
 
-  const handleGenreChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedGenre(event.target.value);
-  };
-  
- 
   return (
     <div>
-      <h1>Movies</h1>
-      <input
-        type="text"
-        placeholder="Search Movies"
-        value={searchTerm}
-        onChange={handleSearchChange}
-      />
-      <select value={selectedGenre} onChange={handleGenreChange}>
-        {genres.map(genre => (
-          <option key={genre} value={genre}>
-            {genre}
-          </option>
-        ))}
-      </select>
-      
+      <div className="searchContainer">
+        <h1>Movies</h1>
+        <input
+          type="text"
+          placeholder="Search Movies"
+          value={searchTerm}
+          onChange={handleSearchChange}
+        />
+        <select value={selectedGenre} onChange={handleGenreChange}>
+          {genres.map(genre => (
+            <option key={genre} value={genre}>
+              {genre}
+            </option>
+          ))}
+        </select>
+
+      </div>
       <MovieList movies={filteredMovies} onCardClick={handleCardClick} />
       <MovieModal show={showModal} onClose={() => setShowModal(false)} movieId={movieDetails?.id}>
         {movieDetails && (
@@ -127,5 +128,5 @@ const Home: React.FC = () => {
     </div>
   );
 };
- 
+
 export default Home;

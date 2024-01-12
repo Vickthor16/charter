@@ -1,11 +1,11 @@
 import React from 'react';
- 
-type SearchInputProps = {
+
+interface SearchInputProps {
   value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
 };
- 
+
 const SearchInput: React.FC<SearchInputProps> = ({ value, onChange, placeholder }) => {
   return (
     <input
@@ -16,5 +16,5 @@ const SearchInput: React.FC<SearchInputProps> = ({ value, onChange, placeholder 
     />
   );
 };
- 
+
 export default SearchInput;
