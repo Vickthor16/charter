@@ -1,9 +1,0 @@
-.movieListContainer {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-  
-  .cardContainer {
-    flex: 1 0 200px;
-  }

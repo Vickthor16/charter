@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
- 
-interface MovieModalProps  {
+
+interface MovieModalProps {
   show: boolean;
   onClose: () => void;
   children: React.ReactNode;
   movieId?: string;
 };
- 
-const MovieModal: React.FC<MovieModalProps> = ({ show, onClose, children, movieId }) => {
+
+  const MovieModal: React.FC<MovieModalProps> = ({ show, onClose, children, movieId }) => {
   const [imageError, setImageError] = useState(false);
   const defaultImagePath = '/images/movieHeroImages/defaultImage.jpeg';
   const heroPath = movieId ? `/images/movieHeroImages/${movieId}.jpeg` : defaultImagePath;
- 
+
   if (!show) {
     return null;
   }
- 
+
   const handleImageError = () => {
     setImageError(true);
   };
- 
+
   return (
     <div className="modal" onClick={onClose}>
       <div className="modal-content" onClick={e => e.stopPropagation()}>
@@ -34,5 +34,5 @@ const MovieModal: React.FC<MovieModalProps> = ({ show, onClose, children, movieI
     </div>
   );
 };
- 
+
 export default MovieModal;

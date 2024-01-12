@@ -1,18 +1,18 @@
 import React from 'react';
 
-interface MovieCardProps  {
+interface MovieCardProps {
   movieId: string;
   title: string;
   genres: string[];
   onClick: (movieId: string) => void
 };
 
-const MovieCard: React.FC<MovieCardProps> = ({ movieId, title, genres, onClick }) => {
+  const MovieCard: React.FC<MovieCardProps> = ({ movieId, title, genres, onClick }) => {
   const posterPath = `/images/moviePosterImages/${movieId}.jpeg`;
   const defaultImagePath = '/images/moviePosterImages/defaultImage.jpeg';
 
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    e.currentTarget.src = defaultImagePath;
+    e.currentTarget.src = defaultImagePath;  // more research needed.....
   };
 
   return (
