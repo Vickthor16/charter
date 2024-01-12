@@ -44,6 +44,12 @@ const Home: React.FC = () => {
         }
         const result = await response.json();
         setMovies(result.data);
+
+        const allGenres = result.data.flatMap(movie => movie.genres);
+        const uniqueGenres = Array.from(new Set(allGenres));
+        setGenres(['All', ...uniqueGenres]);
+
+        
       } catch (error) {
         console.error('Error fetching movies:', error);
       }
