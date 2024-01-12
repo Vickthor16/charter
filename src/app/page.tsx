@@ -43,7 +43,7 @@ const Home: React.FC = () => {
         const result = await response.json();
         setMovies(result.data);
 
-        const allGenres = result.data.flatMap((movie: { genres: any; }) => movie.genres);
+        const allGenres: string[] = result.data.flatMap((movie: { genres: any; }) => movie.genres);
         const uniqueGenres = Array.from(new Set(allGenres));
         setGenres(['All', ...uniqueGenres]);
 
