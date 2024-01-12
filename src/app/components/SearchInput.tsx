@@ -1,12 +1,12 @@
 import React from 'react';
  
-type SelectInputProps = {
+type SearchInputProps = {
   value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
 };
  
-const SelectInput: React.FC<SelectInputProps> = ({ value, onChange, placeholder }) => {
+const SearchInput: React.FC<SearchInputProps> = ({ value, onChange, placeholder }) => {
   return (
     <input
       type="text"
@@ -17,4 +17,4 @@ const SelectInput: React.FC<SelectInputProps> = ({ value, onChange, placeholder 
   );
 };
  
-export default SelectInput;
+export default SearchInput;

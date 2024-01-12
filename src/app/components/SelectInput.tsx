@@ -1,6 +1,6 @@
 import React from 'react';
  
-type SelectInputProps = {
+interface SelectInputProps  {
   value: string;
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   options: string[];
