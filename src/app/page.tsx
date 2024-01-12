@@ -90,6 +90,14 @@ const Home: React.FC = () => {
         value={searchTerm}
         onChange={handleSearchChange}
       />
+      <select value={selectedGenre} onChange={handleGenreChange}>
+        {genres.map(genre => (
+          <option key={genre} value={genre}>
+            {genre}
+          </option>
+        ))}
+      </select>
+      
       <MovieList movies={filteredMovies} onCardClick={handleCardClick} />
       <MovieModal show={showModal} onClose={() => setShowModal(false)} movieId={movieDetails?.id}>
         {movieDetails && (
