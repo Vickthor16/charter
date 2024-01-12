@@ -28,6 +28,7 @@ const Home: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedMovieId, setSelectedMovieId] = useState<string | null>(null);
   const [movieDetails, setMovieDetails] = useState<MovieDetail | null>(null);
+  const [genres, setGenres] = useState<string[]>([]);
  
   useEffect(() => {
     const fetchData = async () => {
@@ -80,6 +81,11 @@ const Home: React.FC = () => {
   const filteredMovies = movies.filter(movie =>
     movie.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const handleGenreChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedGenre(event.target.value);
+  };
+  
  
   return (
     <div>
