@@ -8,8 +8,8 @@ interface MovieCardProps {
 };
 
   const MovieCard: React.FC<MovieCardProps> = ({ movieId, title, genres, onClick }) => {
-  const posterPath = `/images/moviePosterImages/${movieId}.jpeg`;
-  const defaultImagePath = '/images/moviePosterImages/defaultImage.jpeg';
+  const posterPath = `images/moviePosterImages/${movieId}.jpeg`;
+  const defaultImagePath = 'images/moviePosterImages/defaultImage.jpeg';
 
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     e.currentTarget.src = defaultImagePath;  // more research needed.....
