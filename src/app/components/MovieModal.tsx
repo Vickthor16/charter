@@ -11,6 +11,7 @@ interface MovieModalProps {
   const [imageError, setImageError] = useState(false);
   const defaultImagePath = 'images/movieHeroImages/defaultImage.jpeg';
   const heroPath = movieId ? `images/movieHeroImages/${movieId}.jpeg` : defaultImagePath;
+  
 
   if (!show) {
     return null;
